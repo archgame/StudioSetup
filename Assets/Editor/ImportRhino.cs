@@ -142,19 +142,14 @@ public class ImportRhino : EditorWindow
         //instantiate gameobject
         GameObject obj = null;
         if (prefab == null)
-        {
             obj = new GameObject(name);
-        }
         else
-        {
-            //obj = Instantiate(prefab, position, Quaternion.identity);
             obj = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-        }
 
         //set object position
-        obj.transform.position = position;
-        if (parent != null) { obj.transform.parent = parent.transform; }
-        obj.transform.rotation.SetLookRotation(forward, up);
+        obj.transform.position = position; //set position
+        obj.transform.rotation = Quaternion.LookRotation(forward, up); //set rotation
+        if (parent != null) { obj.transform.parent = parent.transform; } //if parent, set parent
         return obj;
     }
 }
