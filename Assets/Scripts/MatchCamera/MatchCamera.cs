@@ -6,6 +6,9 @@ public class MatchCamera : MonoBehaviour
 {
     public UnityEngine.TextAsset csvFile = null;
 
+    public float Scale = 1;
+    public Vector3 OriginAdjust = Vector3.zero;
+
     public Vector3[] _positions;
     public Vector3[] _forwards;
     public Vector3[] _ups;
@@ -48,6 +51,11 @@ public class MatchCamera : MonoBehaviour
                 Vector3 position = Vector3.Lerp(_positions[i - 1], _positions[i], lerp);
                 Vector3 forward = Vector3.Lerp(_forwards[i - 1], _forwards[i], lerp);
                 Vector3 up = Vector3.Lerp(_ups[i - 1], _ups[i], lerp);
+
+                //position updates
+                position *= Scale;
+                position += OriginAdjust;
+
                 this.transform.position = position; //set position
                 this.transform.rotation = Quaternion.LookRotation(forward, up); //set rotation
                 break;
